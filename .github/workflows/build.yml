@@ -1,0 +1,74 @@
+name: Build 01-simple-cube
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          cmake \
+          libglfw3-dev \
+          libgl1-mesa-dev \
+          libglu1-mesa-dev \
+          xorg-dev
+
+    - name: Download and install MuJoCo
+      run: |
+        MUJOCO_VERSION="3.2.6"
+        wget https://github.com/google-deepmind/mujoco/releases/download/${MUJOCO_VERSION}/mujoco-${MUJOCO_VERSION}-linux-x86_64.tar.gz
+        tar -xzf mujoco-${MUJOCO_VERSION}-linux-x86_64.tar.gz
+        sudo mkdir -p /usr/local/mujoco
+        sudo mv mujoco-${MUJOCO_VERSION} /usr/local/mujoco/
+        echo "export LD_LIBRARY_PATH=/usr/local/mujoco/mujoco-${MUJOCO_VERSION}/lib:\$LD_LIBRARY_PATH" >> $GITHUB_ENV
+        echo "LD_LIBRARY_PATH=/usr/local/mujoco/mujoco-${MUJOCO_VERSION}/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+
+    - name: Create MuJoCo CMake config
+      run: |
+        sudo mkdir -p /usr/local/mujoco/mujoco-3.2.6/lib/cmake/mujoco
+        sudo tee /usr/local/mujoco/mujoco-3.2.6/lib/cmake/mujoco/mujocoConfig.cmake > /dev/null <<'EOF'
+        # MuJoCo CMake configuration file
+        get_filename_component(MUJOCO_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+        get_filename_component(MUJOCO_INCLUDE_DIRS "${MUJOCO_CMAKE_DIR}/../../../include" ABSOLUTE)
+        get_filename_component(MUJOCO_LIBRARY_DIRS "${MUJOCO_CMAKE_DIR}/../../" ABSOLUTE)
+
+        find_library(MUJOCO_LIBRARY
+          NAMES mujoco libmujoco
+          PATHS ${MUJOCO_LIBRARY_DIRS}
+          NO_DEFAULT_PATH
+        )
+
+        if(NOT TARGET mujoco::mujoco)
+          add_library(mujoco::mujoco SHARED IMPORTED)
+          set_target_properties(mujoco::mujoco PROPERTIES
+            IMPORTED_LOCATION "${MUJOCO_LIBRARY}"
+            INTERFACE_INCLUDE_DIRECTORIES "${MUJOCO_INCLUDE_DIRS}"
+          )
+        endif()
+
+        set(mujoco_FOUND TRUE)
+        EOF
+
+    - name: Build 01-simple-cube
+      run: |
+        cd 01-simple-cube
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_PREFIX_PATH=/usr/local/mujoco/mujoco-3.2.6/lib/cmake ..
+        make
+
+    - name: Check build artifacts
+      run: |
+        ls -la 01-simple-cube/build/
+        test -f 01-simple-cube/build/main
