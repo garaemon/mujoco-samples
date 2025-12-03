@@ -1,0 +1,9 @@
+<mujoco>
+  <worldbody>
+    <light diffuse="1 1 1" pos="0 0 3" dir="0 0 -1"/>
+    <body name="box_and_sphere" euler="0 0 -30">
+      <joint name="swing" type="hinge" axis="1 -1 0" pos="-.2 -.2 -.2"/>
+      <geom name="red_box" type="box" size=".2 .2 .2" rgba="1 0 0 1"/>
+    </body>
+  </worldbody>
+</mujoco>
