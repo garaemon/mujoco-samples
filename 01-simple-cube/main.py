@@ -1,14 +1,15 @@
+import time
+
 import mujoco
-import mujoco_viewer
+import mujoco.viewer
 
 model = mujoco.MjModel.from_xml_path('model.xml')
 
 data = mujoco.MjData(model)
 
-viewer = mujoco_viewer.MujocoViewer(model, data)
-
-while True:
-    mujoco.mj_step(model, data)
-    viewer.render()
+with mujoco.viewer.launch_passive(model, data) as viewer:
+    while True:
+        mujoco.mj_step(model, data)
+        viewer.sync()
 
 viewer.close()
