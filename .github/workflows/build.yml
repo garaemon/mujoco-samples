@@ -1,4 +1,4 @@
-name: Build 01-simple-cube
+name: Build Samples
 
 on:
   push:
@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sample: [01-simple-cube, 02-free-hinge, 03-position-control]
 
     steps:
     - name: Checkout code
@@ -31,7 +35,6 @@ jobs:
         tar -xzf mujoco-${MUJOCO_VERSION}-linux-x86_64.tar.gz
         sudo mkdir -p /usr/local/mujoco
         sudo mv mujoco-${MUJOCO_VERSION} /usr/local/mujoco/
-        echo "export LD_LIBRARY_PATH=/usr/local/mujoco/mujoco-${MUJOCO_VERSION}/lib:\$LD_LIBRARY_PATH" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=/usr/local/mujoco/mujoco-${MUJOCO_VERSION}/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
 
     - name: Create MuJoCo CMake config
@@ -60,9 +63,9 @@ jobs:
         set(mujoco_FOUND TRUE)
         EOF
 
-    - name: Build 01-simple-cube
+    - name: Build ${{ matrix.sample }}
       run: |
-        cd 01-simple-cube
+        cd ${{ matrix.sample }}
         mkdir -p build
         cd build
         cmake -DCMAKE_PREFIX_PATH=/usr/local/mujoco/mujoco-3.2.6/lib/cmake ..
@@ -70,5 +73,24 @@ jobs:
 
     - name: Check build artifacts
       run: |
-        ls -la 01-simple-cube/build/
-        test -f 01-simple-cube/build/main
+        ls -la ${{ matrix.sample }}/build/
+        test -f ${{ matrix.sample }}/build/main
+
+  python-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install the project
+        run: uv sync --all-extras --dev
+
+      - name: Run Python script
+        run: |
+          uv run python -c "import mujoco; print(mujoco.__version__)"
