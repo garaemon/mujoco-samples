@@ -1,15 +1,15 @@
+import os
 import time
 
 import mujoco
 import mujoco.viewer
 
-model = mujoco.MjModel.from_xml_path('model.xml')
+curr_dir = os.path.dirname(__file__)
+model_path = os.path.join(curr_dir, 'model.xml')
+model = mujoco.MjModel.from_xml_path(model_path)
 
 data = mujoco.MjData(model)
 
-with mujoco.viewer.launch_passive(model, data) as viewer:
-    while True:
-        mujoco.mj_step(model, data)
-        viewer.sync()
-
-viewer.close()
+# macOS note: launch_passive() requires the script to be run with `mjpython`.
+# On Linux, you can use launch_passive() with a standard python interpreter.
+mujoco.viewer.launch(model, data)
