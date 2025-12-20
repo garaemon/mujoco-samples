@@ -1,0 +1,279 @@
+time="2025-12-20T00:05:26-08:00" level=info msg="Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock'"
+[Build Samples/python-test] ⭐ Run Set up job
+[Build Samples/python-test] 🚀  Start image=catthehacker/ubuntu:act-latest
+[Build Samples/python-test]   🐳  docker pull image=catthehacker/ubuntu:act-latest platform=linux/amd64 username= forcePull=true
+[Build Samples/python-test]   🐳  docker create image=catthehacker/ubuntu:act-latest platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Build Samples/python-test]   🐳  docker run image=catthehacker/ubuntu:act-latest platform=linux/amd64 entrypoint=["tail" "-f" "/dev/null"] cmd=[] network="host"
+[Build Samples/python-test]   🐳  docker exec cmd=[node --no-warnings -e console.log(process.execPath)] user= workdir=
+[Build Samples/python-test]   ✅  Success - Set up job
+[Build Samples/python-test]   ☁  git clone 'https://github.com/astral-sh/setup-uv' # ref=v5
+[Build Samples/python-test] ⭐ Run Main Checkout code
+[Build Samples/python-test]   🐳  docker cp src=/Users/garaemon/ghq/github.com/garaemon/mujoco-samples/. dst=/Users/garaemon/ghq/github.com/garaemon/mujoco-samples
+[Build Samples/python-test]   ✅  Success - Main Checkout code [63.064959ms]
+[Build Samples/python-test] ⭐ Run Main Install uv
+[Build Samples/python-test]   🐳  docker cp src=/Users/garaemon/.cache/act/astral-sh-setup-uv@v5/ dst=/var/run/act/actions/astral-sh-setup-uv@v5/
+[Build Samples/python-test]   🐳  docker exec cmd=[/opt/acttoolcache/node/18.20.8/x64/bin/node /var/run/act/actions/astral-sh-setup-uv@v5/dist/setup/index.js] user= workdir=
+[Build Samples/python-test]   | Downloading uv from "https://github.com/astral-sh/uv/releases/download/0.9.18/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+[Build Samples/python-test]   | [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /tmp/d17cc997-b22e-4feb-a7c0-929517f75d95 -f /tmp/3314d46f-1430-4160-96e8-300f5b598011
+[Build Samples/python-test]   | Added /root/.local/bin to the path
+[Build Samples/python-test]   | Added /opt/hostedtoolcache/uv/0.9.18/x86_64 to the path
+[Build Samples/python-test]   ❓ add-matcher /run/act/actions/astral-sh-setup-uv@v5/.github/python.json
+[Build Samples/python-test]   | Set UV_CACHE_DIR to /tmp/setup-uv-cache
+[Build Samples/python-test]   | Successfully installed uv version 0.9.18
+[Build Samples/python-test]   ✅  Success - Main Install uv [3.775977s]
+[Build Samples/python-test]   ⚙  ::set-env:: UV_CACHE_DIR=/tmp/setup-uv-cache
+[Build Samples/python-test]   ⚙  ::set-output:: uvx-path=/opt/hostedtoolcache/uv/0.9.18/x86_64/uvx
+[Build Samples/python-test]   ⚙  ::set-output:: uv-version=0.9.18
+[Build Samples/python-test]   ⚙  ::set-output:: uv-path=/opt/hostedtoolcache/uv/0.9.18/x86_64/uv
+[Build Samples/python-test]   ⚙  ::add-path:: /root/.local/bin
+[Build Samples/python-test]   ⚙  ::add-path:: /opt/hostedtoolcache/uv/0.9.18/x86_64
+[Build Samples/python-test] ⭐ Run Main Set up Python
+[Build Samples/python-test]   🐳  docker exec cmd=[bash -e /var/run/act/workflow/2] user= workdir=
+[Build Samples/python-test]   | Downloading cpython-3.14.2-linux-x86_64-gnu (download) (33.7MiB)
+[Build Samples/python-test]   |  Downloaded cpython-3.14.2-linux-x86_64-gnu (download)
+[Build Samples/python-test]   | Installed Python 3.14.2 in 3.01s
+[Build Samples/python-test]   |  + cpython-3.14.2-linux-x86_64-gnu (python3.14)
+[Build Samples/python-test]   ✅  Success - Main Set up Python [3.245872s]
+[Build Samples/python-test] ⭐ Run Main Install the project
+[Build Samples/python-test]   🐳  docker exec cmd=[bash -e /var/run/act/workflow/3] user= workdir=
+[Build Samples/python-test]   | Using CPython 3.14.2
+[Build Samples/python-test]   | Creating virtual environment at: .venv
+[Build Samples/python-test]   | Resolved 11 packages in 25ms
+[Build Samples/python-test]   | Downloading pyopengl (3.0MiB)
+[Build Samples/python-test]   | Downloading numpy (15.8MiB)
+[Build Samples/python-test]   |    Building mujoco==3.4.0
+[Build Samples/python-test]   |  Downloaded numpy
+[Build Samples/python-test]   |  Downloaded pyopengl
+[Build Samples/python-test]   |   × Failed to build `mujoco==3.4.0`
+[Build Samples/python-test]   |   ├─▶ The build backend returned an error
+[Build Samples/python-test]   |   ╰─▶ Call to `setuptools.build_meta.build_wheel` failed (exit status: 1)
+[Build Samples/python-test]   | 
+[Build Samples/python-test]   |       [stdout]
+[Build Samples/python-test]   |       running bdist_wheel
+[Build Samples/python-test]   |       running build
+[Build Samples/python-test]   |       running build_py
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/bindings_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/minimize_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/renderer_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/msh2obj.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/renderer.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/gl_context.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/rollout_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/viewer.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/msh2obj_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/memory_leak_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/__init__.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/render_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/specs_test.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/rollout.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/viewer_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       copying mujoco/minimize.py -> build/lib.linux-x86_64-cpython-314/mujoco
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/cgl
+[Build Samples/python-test]   |       copying mujoco/cgl/cgl.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/cgl
+[Build Samples/python-test]   |       copying mujoco/cgl/__init__.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/cgl
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/egl
+[Build Samples/python-test]   |       copying mujoco/egl/__init__.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/egl
+[Build Samples/python-test]   |       copying mujoco/egl/egl_ext.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/egl
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/osmesa
+[Build Samples/python-test]   |       copying mujoco/osmesa/__init__.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/osmesa
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/glfw
+[Build Samples/python-test]   |       copying mujoco/glfw/__init__.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/glfw
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/utils.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/shapes.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/objects.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/demo.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/exporter.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/exporter_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/lights.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       copying mujoco/usd/camera.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/usd
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/type_parsing.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/ast_nodes.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/type_parsing_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/enums.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/structs.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/mjxmacro.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/enums_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/structs_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/__init__.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/functions.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/functions_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       copying mujoco/introspect/ast_nodes_test.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/introspect/codegen
+[Build Samples/python-test]   |       copying mujoco/introspect/codegen/generate_enums.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect/codegen
+[Build Samples/python-test]   |       copying mujoco/introspect/codegen/formatter.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect/codegen
+[Build Samples/python-test]   |       copying mujoco/introspect/codegen/generate_structs.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect/codegen
+[Build Samples/python-test]   |       copying mujoco/introspect/codegen/generate_functions.py ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/introspect/codegen
+[Build Samples/python-test]   |       creating build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       copying mujoco/testdata/model.xml ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       copying mujoco/testdata/msh.xml ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       copying mujoco/testdata/abdomen_1_body.msh ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       copying mujoco/testdata/usd_golden.usda ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       copying mujoco/testdata/simple_usd_preview_surface.usda ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       copying mujoco/testdata/MJCF_NoRoot.zip ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       copying mujoco/testdata/MJCF_Root.zip ->
+[Build Samples/python-test]   |       build/lib.linux-x86_64-cpython-314/mujoco/testdata
+[Build Samples/python-test]   |       running build_ext
+[Build Samples/python-test]   | 
+[Build Samples/python-test]   |       [stderr]
+[Build Samples/python-test]   |       Traceback (most recent call last):
+[Build Samples/python-test]   |         File "<string>", line 11, in <module>
+[Build Samples/python-test]   |           wheel_filename =
+[Build Samples/python-test]   |       backend.build_wheel("/tmp/setup-uv-cache/builds-v0/.tmpdb90nW", {},
+[Build Samples/python-test]   |       None)
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/build_meta.py",
+[Build Samples/python-test]   |       line 432, in build_wheel
+[Build Samples/python-test]   |           return _build(['bdist_wheel'])
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/build_meta.py",
+[Build Samples/python-test]   |       line 423, in _build
+[Build Samples/python-test]   |           return self._build_with_temp_dir(
+[Build Samples/python-test]   |                  ~~~~~~~~~~~~~~~~~~~~~~~~~^
+[Build Samples/python-test]   |               cmd,
+[Build Samples/python-test]   |               ^^^^
+[Build Samples/python-test]   |           ...<3 lines>...
+[Build Samples/python-test]   |               self._arbitrary_args(config_settings),
+[Build Samples/python-test]   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[Build Samples/python-test]   |           )
+[Build Samples/python-test]   |           ^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/build_meta.py",
+[Build Samples/python-test]   |       line 404, in _build_with_temp_dir
+[Build Samples/python-test]   |           self.run_setup()
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/build_meta.py",
+[Build Samples/python-test]   |       line 317, in run_setup
+[Build Samples/python-test]   |           exec(code, locals())
+[Build Samples/python-test]   |           ~~~~^^^^^^^^^^^^^^^^
+[Build Samples/python-test]   |         File "<string>", line 357, in <module>
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/__init__.py",
+[Build Samples/python-test]   |       line 115, in setup
+[Build Samples/python-test]   |           return distutils.core.setup(**attrs)
+[Build Samples/python-test]   |                  ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/core.py",
+[Build Samples/python-test]   |       line 186, in setup
+[Build Samples/python-test]   |           return run_commands(dist)
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/core.py",
+[Build Samples/python-test]   |       line 202, in run_commands
+[Build Samples/python-test]   |           dist.run_commands()
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~~^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/dist.py",
+[Build Samples/python-test]   |       line 1002, in run_commands
+[Build Samples/python-test]   |           self.run_command(cmd)
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/dist.py",
+[Build Samples/python-test]   |       line 1102, in run_command
+[Build Samples/python-test]   |           super().run_command(command)
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/dist.py",
+[Build Samples/python-test]   |       line 1021, in run_command
+[Build Samples/python-test]   |           cmd_obj.run()
+[Build Samples/python-test]   |           ~~~~~~~~~~~^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/command/bdist_wheel.py",
+[Build Samples/python-test]   |       line 370, in run
+[Build Samples/python-test]   |           self.run_command("build")
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/cmd.py",
+[Build Samples/python-test]   |       line 357, in run_command
+[Build Samples/python-test]   |           self.distribution.run_command(command)
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/dist.py",
+[Build Samples/python-test]   |       line 1102, in run_command
+[Build Samples/python-test]   |           super().run_command(command)
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/dist.py",
+[Build Samples/python-test]   |       line 1021, in run_command
+[Build Samples/python-test]   |           cmd_obj.run()
+[Build Samples/python-test]   |           ~~~~~~~~~~~^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/command/build.py",
+[Build Samples/python-test]   |       line 135, in run
+[Build Samples/python-test]   |           self.run_command(cmd_name)
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~^^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/cmd.py",
+[Build Samples/python-test]   |       line 357, in run_command
+[Build Samples/python-test]   |           self.distribution.run_command(command)
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/dist.py",
+[Build Samples/python-test]   |       line 1102, in run_command
+[Build Samples/python-test]   |           super().run_command(command)
+[Build Samples/python-test]   |           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[Build Samples/python-test]   |         File
+[Build Samples/python-test]   |       "/tmp/setup-uv-cache/builds-v0/.tmpRRwMAk/lib/python3.14/site-packages/setuptools/_distutils/dist.py",
+[Build Samples/python-test]   |       line 1021, in run_command
+[Build Samples/python-test]   |           cmd_obj.run()
+[Build Samples/python-test]   |           ~~~~~~~~~~~^^
+[Build Samples/python-test]   |         File "<string>", line 154, in run
+[Build Samples/python-test]   |         File "<string>", line 168, in _find_mujoco
+[Build Samples/python-test]   |       RuntimeError: MUJOCO_PATH environment variable is not set
+[Build Samples/python-test]   | 
+[Build Samples/python-test]   |       hint: This usually indicates a problem with the package or the build
+[Build Samples/python-test]   |       environment.
+[Build Samples/python-test]   |   help: `mujoco` (v3.4.0) was included because `mujoco-samples` (v0.1.0)
+[Build Samples/python-test]   |         depends on `mujoco`
+[Build Samples/python-test]   ❌  Failure - Main Install the project [3.254951459s]
+[Build Samples/python-test] exitcode '1': failure
+[Build Samples/python-test] ⭐ Run Complete job
+[Build Samples/python-test]   ✅  Success - Complete job
+[Build Samples/python-test] 🏁  Job failed
+Error: Job 'python-test' failed
