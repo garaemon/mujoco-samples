@@ -1,6 +1,6 @@
 #include <chrono>
 #include <cstdio> // For fprintf
-#include <thread>
+
 
 // #include <mujoco/mjerrors.h>
 

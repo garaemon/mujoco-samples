@@ -1,8 +1,7 @@
 #include <chrono>
+#include <cmath>
 #include <cstdio> // For fprintf
-#include <cstdio>
 #include <iostream>
-#include <thread>
 
 // #include <mujoco/mjerrors.h>
 

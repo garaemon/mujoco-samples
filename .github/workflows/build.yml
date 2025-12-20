@@ -33,8 +33,10 @@ jobs:
         MUJOCO_VERSION="3.2.6"
         wget https://github.com/google-deepmind/mujoco/releases/download/${MUJOCO_VERSION}/mujoco-${MUJOCO_VERSION}-linux-x86_64.tar.gz
         tar -xzf mujoco-${MUJOCO_VERSION}-linux-x86_64.tar.gz
+        ls -F
         sudo mkdir -p /usr/local/mujoco
         sudo mv mujoco-${MUJOCO_VERSION} /usr/local/mujoco/
+        ls -R /usr/local/mujoco
         echo "LD_LIBRARY_PATH=/usr/local/mujoco/mujoco-${MUJOCO_VERSION}/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
 
     - name: Create MuJoCo CMake config
