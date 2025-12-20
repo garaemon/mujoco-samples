@@ -72,3 +72,22 @@ jobs:
       run: |
         ls -la 01-simple-cube/build/
         test -f 01-simple-cube/build/main
+
+  python-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install the project
+        run: uv sync --all-extras --dev
+
+      - name: Run Python script (01-simple-cube)
+        run: |
+          uv run python -c "import mujoco; print(mujoco.__version__)"
